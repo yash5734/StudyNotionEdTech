@@ -12,11 +12,11 @@ const CodeBlocks = ({
   backgroudGradient,
   codeColor,
   codeblock,
-  
 }) => {
   return (
-    <div className={`flex flex-col ${position} my-20 relative justify-between gap-14 lg:gap-10`}>
-
+    <div
+      className={`flex flex-col ${position} my-20 relative justify-between gap-14 lg:gap-10`}
+    >
       {/* section 1  */}
       <div className="w-[100%] lg:w-[40%] flex flex-col gap-8">
         {heading}
@@ -36,13 +36,10 @@ const CodeBlocks = ({
         </div>
       </div>
 
-      
       {/* section 2  */}
 
       <div className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]">
-       
-      {backgroudGradient}
-        
+        {backgroudGradient}
 
         <div className="text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold">
           <p>1</p>
@@ -58,49 +55,42 @@ const CodeBlocks = ({
           <p>11</p>
         </div>
 
-        <div className={`w-[90%] flex flex-col font-bold font-mono  gap-2 pr-2`}>
-        <TypeAnimation
-                    sequence={[codeblock[0], 2000, ""]}
-                    repeat={Infinity}
-                    cursor={true}
-                
-                    style = {
-                        {
-                            whiteSpace: "pre-line",
-                            display:"block",
-                            color: `yellow`,                  
-                        }
-                    }
-                    omitDeletionAnimation={true}
-                />
-                <TypeAnimation
-                    sequence={[codeblock[1], 1000, ""]}
-                    repeat={Infinity}
-                    cursor={true}
-                
-                    style = {
-                        {
-                            whiteSpace: "pre-line",
-                            display:"block",
-                            color: `white`,                  
-                        }
-                    }
-                    omitDeletionAnimation={true}
-                />
-                <TypeAnimation
-                    sequence={[codeblock[2], 200, ""]}
-                    repeat={Infinity}
-                    cursor={true}
-                
-                    style = {
-                        {
-                            whiteSpace: "pre-line",
-                            display:"block",
-                            color: `#D43D63`,                  
-                        }
-                    }
-                    omitDeletionAnimation={true}
-                />
+        <div
+          className={`w-[90%] flex flex-col font-bold font-mono  gap-2 pr-2`}
+        >
+          <TypeAnimation
+            sequence={[codeblock[0], 2000, ""]}
+            repeat={Infinity}
+            cursor={true}
+            style={{
+              whiteSpace: "pre-line",
+              display: "block",
+              color: `yellow`,
+            }}
+            omitDeletionAnimation={true}
+          />
+          <TypeAnimation
+            sequence={[codeblock[1], 1000, ""]}
+            repeat={Infinity}
+            cursor={true}
+            style={{
+              whiteSpace: "pre-line",
+              display: "block",
+              color: `white`,
+            }}
+            omitDeletionAnimation={true}
+          />
+          <TypeAnimation
+            sequence={[codeblock[2], 200, ""]}
+            repeat={Infinity}
+            cursor={true}
+            style={{
+              whiteSpace: "pre-line",
+              display: "block",
+              color: `#D43D63`,
+            }}
+            omitDeletionAnimation={true}
+          />
         </div>
       </div>
     </div>

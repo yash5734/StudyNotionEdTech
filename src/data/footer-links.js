@@ -21,6 +21,7 @@ export const FooterLink2 = [
       { title: "Web Development", link: "/web-development" },
     ],
   },
+
   {
     title: "Languages",
     links: [
@@ -40,6 +41,7 @@ export const FooterLink2 = [
       { title: "Swift", link: "/swift" },
     ],
   },
+
   {
     title: "Career building",
     links: [
