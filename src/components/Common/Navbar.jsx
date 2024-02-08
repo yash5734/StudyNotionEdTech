@@ -10,6 +10,7 @@ import { apiConnector } from "../../Services/ApiConnector";
 import { categories } from "../../Services/Apis";
 import axios from "axios";
 import {IoIosArrowDown} from "react-icons/io"
+import { ACCOUNT_TYPE } from "../../utils/Constants";
 
 const Navbar = () => {
   const location = useLocation();
@@ -19,6 +20,8 @@ const Navbar = () => {
   const { totalItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.profile);
   const { token } = useSelector((state) => state.auth);
+  console.log("token-->",token)
+  console.log("user-->",user)
   const [subLinks, setSubLinks] = useState({});
 
   const fetchSubLinks = async () => {
@@ -27,10 +30,13 @@ const Navbar = () => {
       // const result = await axios.get("http://localhost:4000/api/v1/course/showAllCategories").then().catch((e)=>console.log(e));
       console.log("printing sublink", result.data.data);
       setSubLinks(result.data.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  useEffect(() => {fetchSubLinks()}, []);
+  useEffect(() => { fetchSubLinks() }, []);
+  console.log(user)
 
   return (
     <div className="h-14 flex flex-row items-center justify-center border-b-[1px] border-b-richblack-700">
@@ -93,10 +99,13 @@ const Navbar = () => {
         <div className="flex gap-x-4 items-center">
           {/* cart */}
 
-          {user && user != "Instructor" && (
+          {user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to={"/dashboard/cart"} className="relative">
-              <AiOutlineShoppingCart />
-              {totalItems > 0 && <span>{totalItems}</span>}
+              <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
+              {totalItems > 0 &&
+                <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                {totalItems}
+              </span>}
             </Link>
           )}
 
@@ -116,7 +125,7 @@ const Navbar = () => {
               </button>
             </Link>
           )}
-          {token !== null && <ProfileDropDown />}
+          {token != null && <ProfileDropDown />}
         </div>
       </div>
     </div>

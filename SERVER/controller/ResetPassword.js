@@ -25,15 +25,18 @@ exports.resetPasswordToken = async (req, res) => {
             })
         }
         // generate token,
-        const token = crypto.randomUUID();
+        const token = crypto.randomBytes(20).toString("hex");
 
         //add token and expires in user schema
         const updatedUser = await User.findOneAndUpdate({ email }, { token: token, resetPasswordExpires:Date.now()+ 5 * 60 * 1000 }, { new: true });
         // generate url
-        const url = `https://localhost:3000/update-password/${token}`;
+        const url = `http://localhost:3000/update-password/${token}`;
 
         // mail send with url
-        await mailSender(email, "Reset Password Link", `link: ${url}`);
+        await mailSender(email, 
+            " Reset Ur Password => ",
+            `Password Reset Link: ${url}`);
+            console.log("token ==>", token);
 
         // return response
         return res.status(200).json({
@@ -76,7 +79,7 @@ exports.resetPassword = async (req,res) => {
         }
 
         // check expiration of the token
-        if (userDetails.resetPasswordExpires > Date.now()) {
+        if (userDetails.resetPasswordExpires < Date.now()) {
             return res.status(401).json({
                 success: false,
                 message: "Reset Link is expired",
@@ -87,8 +90,8 @@ exports.resetPassword = async (req,res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // update password in db
-        await User.findOneAndUpdate({ token: token }, { password: hashedPassword }, { new: true });
-
+       await User.findOneAndUpdate({ token: token }, { password: hashedPassword }, { new: true });
+       
         // return response
         return res.status(201).json({
             success: true,
