@@ -14,9 +14,14 @@ export default function ProfileDropdown() {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
+  
   useOnClickOutside(ref, () => setOpen(false))
-
-  if (!user) return null
+  
+  if (!user) {
+    console.log("user null ho rha he")
+    return null;
+  }
+  console.log("profile dropdown")
 
   return (
     <button className="relative" onClick={() => setOpen(true)}>
